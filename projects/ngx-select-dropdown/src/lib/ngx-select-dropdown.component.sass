@@ -1,0 +1,92 @@
+button, input
+    border-width: 0px
+
+.nxt_select_wrapper
+    position: relative
+    width: 100%
+    
+    .nxt_select--disabled
+        pointer-events: none
+        opacity: 0.7
+        cursor: no-drop
+
+    .nxt_select_options
+        display: flex
+        position: absolute
+        flex-direction: column
+        width: 100%
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px
+        border-bottom-right-radius: 0.25rem
+        border-bottom-left-radius: 0.25rem
+        z-index: 100
+        overflow-y: hidden
+
+        .nxt_select_search
+            display: flex
+            position: sticky
+            flex: none
+            flex-direction: row
+            height: 3rem
+            width: 100%
+            top: 0
+            align-items: center
+
+            .nxt_select_search--icon
+                height: 1.5rem
+                width: 1.5rem
+                margin: 0 0.5rem
+
+            .nxt_select_search_input
+                width: 100%
+                font-size: 1rem
+                line-height: 1.5rem
+                @apply bg-tertiary placeholder:text-placeholder
+
+                &:focus
+                    outline: none
+
+        .nxt_select_list_wrapper
+            overflow-y: auto
+
+            hr
+                margin: 0
+                border: 0
+
+            .nxt_select_option
+                display: flex
+                height: 3rem
+                padding: 0 1rem
+                align-items: center
+
+.nxt_select_button
+    display: flex
+    width: 100%
+    align-items: center
+    justify-content: space-between
+    margin-top: 0.25rem
+    padding: 0
+    border-radius: 0.25rem
+    text-align: left
+    font-size: 0.875rem
+    font-weight: 500
+    line-height: 1.25rem
+    cursor: pointer
+
+    .nxt_select_button_label
+        margin: 0.75rem
+
+    .nxt_select_button--icon
+        height: 1.25rem
+        width: 1.25rem
+        margin-right: 0.5rem
+        color: rgb(107 114 128)
+
+.scrollbar-hide
+    -ms-overflow-style: none
+    scrollbar-width: none
+    overflow-y: scroll
+
+    &::-webkit-scrollbar
+        display: none
+        width: 0
+        height: 0
