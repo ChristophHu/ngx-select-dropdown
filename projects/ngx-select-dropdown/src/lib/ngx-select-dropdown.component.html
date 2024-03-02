@@ -1,0 +1,51 @@
+<div class="nxt_select_wrapper">
+    <div [ngClass]="{ 'nxt_select--disabled text-disabled': disabled }" *ngIf="!toggleDropdown" (click)="openSelectDropdown()">
+        <ng-container [ngTemplateOutlet]="dropdownButtonTemplate || dropdownButton"></ng-container>
+    </div>
+    <div *ngIf="toggleDropdown" (click)="closeSelectDropdown()">
+        <ng-container [ngTemplateOutlet]="dropdownButtonTemplate || dropdownButton"></ng-container>
+    </div>
+    <div #dropdownList class="nxt_select_options" *ngIf="toggleDropdown" [style.maxHeight]="config.height" [style.top]="top">
+        <div class="nxt_select_search bg-tertiary text-placeholder border-b border-borderline" *ngIf="config.search">
+            <div class="nxt_select_search--icon text-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+            </div>
+            <input type="text" name="search-text" class="nxt_select_search_input bg-tertiary" placeholder="Suche..." [(ngModel)]="searchText" (change)="changeSearchText($event)" (input)="searchTextChanged()" />
+        </div>
+        <div class="nxt_select_list_wrapper bg-tertiary scrollbar-hide">
+            <div class="p-0 list-none">
+                <div class="nxt_select_option bg-secondary" *ngFor="let selected of selectedItems; let i = index" (click)="deselectItem(selected, i)" (mousedown)="optionMouseDown = true">
+                    <ng-container [ngTemplateOutlet]="selectedItemTemplate || selectedTemplate" [ngTemplateOutletContext]="{item: selected, config: config}"></ng-container>
+                </div>
+            </div>
+            <hr *ngIf="selectedItems.length > 0 && availableItems.length > 0" class="border-t border-borderline" />
+            <div class="p-0 list-none">
+                <div class="nxt_select_option" #availableOption *ngFor="let item of availableItems | filterBy: searchText:config.searchOnKey | limitTo: config.limitTo; let i = index " tabindex="-1" [ngClass]="{active: focusedItemIndex == i && !item.disabled, disabled: item.disabled}" (click)="selectItem(item, i)" (mousedown)="optionMouseDown = true">
+                    <ng-container [ngTemplateOutlet]="optionItemTemplate || availableItemTemplate" [ngTemplateOutletContext]="{item: item, config: config}"></ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #availableItemTemplate let-item="item" let-config="config">
+    <span>
+        {{ config.displayFn ? config.displayFn(item) : item[config.displayKey] || item }}
+    </span>
+</ng-template>
+<ng-template #selectedTemplate let-item="item" let-config="config">
+    <span>
+        {{ config.displayFn ? config.displayFn(item) : item[config.displayKey] || item }}
+    </span>
+</ng-template>
+
+<ng-template #dropdownButton>
+    <button class="nxt_select_button bg-input text-darker border border-borderline" [ngClass]="{ 'opacity-70 pointer-events-none cursor-no-drop': disabled }" [disabled]="disabled">
+        <!-- <span class="my-3"> -->
+            <span class="nxt_select_button_label">{{ selectedDisplayText }}</span>
+        <!-- </span> -->
+        <div class="nxt_select_button--icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" stroke="currentColor" fill="currentColor"><path d="M14 20l10 10 10-10z"/></svg>
+        </div>
+    </button>
+</ng-template>
