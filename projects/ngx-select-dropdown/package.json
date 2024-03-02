@@ -1,0 +1,32 @@
+{
+  "name": "@christophhu/ngx-select-dropdown",
+  "version": "1.0.0",
+  "description": "Create Angular Select Dropdowns.",
+  "license": "MIT",
+  "author": {
+    "name": "Christoph Huschenhoefer",
+    "email": "christoph@nxt.codes"
+  },
+  "keywords": [
+    "angular",
+    "select",
+    "dropdowns",
+    "tailwindcss"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^17.2.0",
+    "@angular/core": "^17.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristophHu/ngx-select-dropdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChristophHu/ngx-select-dropdown/issues"
+  },
+  "homepage": "https://github.com/ChristophHu/ngx-select-dropdown#readme",
+  "sideEffects": false
+}
